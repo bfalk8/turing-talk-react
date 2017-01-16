@@ -4,9 +4,10 @@
   "description": "Chatting over the wire (WebSockets) like it is the 1940s using an Enigma machine to encode / decode messages.",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node app.js",
-    "build": "webpack -d",
-    "dev": "webpack-dev-server --hot --inline --content-base public/",
+    "start": "node app.js",
+    "prestart": "npm run build",
+    "build": "webpack -d --progress --colors",
+    "dev": "webpack --progress --colors --watch && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

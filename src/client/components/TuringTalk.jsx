@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import io from 'socket.io-client';
-import Feed from 'components/Feed';
+import Chat from 'components/Chat';
 
 let serverAddress = 'localhost';
 let serverPort = '3000';
@@ -15,8 +15,12 @@ class TuringTalk extends Component {
 
   handleMessage(message) {
     this.setState({
-      messages: this.state.messages.push(message)
+      messages: this.state.messages.concat(message)
     });
+  }
+
+  sendMessage(message) {
+    socket.emit('chat message', message);
   }
 
   componentDidMount() {
@@ -30,7 +34,7 @@ class TuringTalk extends Component {
     return (
       <div>
         <h1> Turing Talk! </h1>
-        <Feed messages={ this.state.messages } />
+        <Chat messages={ this.state.messages } sendmethod={ this.sendMessage } />
       </div>
     );
   }

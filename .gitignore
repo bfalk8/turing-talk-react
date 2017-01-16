@@ -51,3 +51,6 @@ jspm_packages
 # public bundles
 public/*
 !public/*.html
+
+# vim sessioin
+**/*/*.vim
