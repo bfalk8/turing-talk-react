@@ -1,10 +1,13 @@
-var path = require('path');
+let path = require('path');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 let BUILD_DIR = path.resolve(__dirname, 'public');
 let APP_DIR = path.resolve(__dirname, 'src/client');
 let PUBLIC_DIR = path.resolve(__dirname, 'public');
 
-var config = {
+let extractCSS = new ExtractTextPlugin('styles.css');
+
+let config = {
   context: APP_DIR,
   entry: './index.jsx',
   output: {
@@ -28,14 +31,13 @@ var config = {
       },
       {
         test: /\.(scss|css)$/,
-        loaders: [
-          'style-loader', 
-          'css-loader?sourceMap&modules&importLoaders=1&localIdentName=[name]-[local]___[hash:base64:5]',
-          'sass-loader'
-        ]
+        loader: extractCSS.extract(['css', 'sass'])
       }
     ]
-  }
+  },
+  plugins: [
+    extractCSS
+  ]
 };
 
 module.exports = config;

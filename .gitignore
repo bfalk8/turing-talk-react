@@ -46,3 +46,8 @@ jspm_packages
 # Yarn Integrity file
 .yarn-integrity
 
+
+###### project specific ########
+# public bundles
+public/*
+!public/*.html
