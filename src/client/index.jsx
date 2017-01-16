@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TuringTalk from './TuringTalk.jsx';
+import TuringTalk from 'components/TuringTalk';
 
-import './style.scss';
+import './main.scss';
 
 ReactDOM.render(
     <TuringTalk messages={["How are you?", "Good", "ok bye"]} />,

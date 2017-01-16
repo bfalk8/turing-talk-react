@@ -17,9 +17,11 @@ let config = {
   },
   resolve: {
     extensions: ['', '.js', '.jsx', '.json', '.scss', '.css'],
+    root: [
+      path.resolve(__dirname, './src/client/')
+    ],
     modulesDirectories: [
-      'node_modules',
-      path.resolve(__dirname, './node_modules')
+      path.resolve(__dirname, './node_modules'),
     ]
   },
   module: {
