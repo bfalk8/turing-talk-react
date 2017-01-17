@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import io from 'socket.io-client';
-import { encode, decode } from 'enigma';
+import { translateInput } from 'enigma';
 import Chat from 'components/Chat';
 
 let serverAddress = 'localhost';
@@ -23,27 +23,24 @@ class TuringTalk extends Component {
       enigmaSettings: props.enigmaSettings || defaultSettings
     }
     this.handleMessage = this.handleMessage.bind(this);
-    this.encodeMessage = this.encodeMessage.bind(this);
-    this.decodeMessage = this.decodeMessage.bind(this);
+    this.sendMessage = this.sendMessage.bind(this);
+    this.translateMessage = this.translateMessage.bind(this);
   }
 
   handleMessage(message) {
     this.setState({
       messages: this.state.messages.concat(
-        {encoded: message, decoded: this.decodeMessage(message)})
+        {encoded: message, decoded: this.translateMessage(message)})
     });
   }
 
   sendMessage(message) {
-    socket.emit('chat message', message);
+    let msg = this.translateMessage(message);
+    socket.emit('chat message', msg);
   }
 
-  encodeMessage(message) {
-    return encode(message, this.state.enigmaSettings);
-  }
-
-  decodeMessage(message) {
-    return decode(message, this.state.enigmaSettings);
+  translateMessage(message) {
+    return translateInput(message, this.state.enigmaSettings);
   }
 
   componentDidMount() {
