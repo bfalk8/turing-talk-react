@@ -8,7 +8,10 @@ class Feed extends Component {
       <div>
         <ul>
           {this.props.messages.map((message) => 
-            <li> <Message messageText={message} /> </li>)}
+            <li> <Message 
+                encodedMessage={message.encoded} 
+                decodedMessage={message.decoded} /> 
+            </li>)}
         </ul>
       </div>
     );

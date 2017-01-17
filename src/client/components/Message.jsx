@@ -3,7 +3,10 @@ import React, { Component } from 'react';
 class Message extends Component {
   render() {
     return (
-      <p>{this.props.messageText}</p>
+      <div>
+        <p>Encoded Message: {this.props.encodedMessage}</p>
+        <p>Decoded Message: {this.props.decodedMessage}</p>
+      </div>
     );
   }
 }
