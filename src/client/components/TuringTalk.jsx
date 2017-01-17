@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import io from 'socket.io-client';
 import { translateInput } from 'enigma';
 import Chat from 'components/Chat';
+import EnigmaSettings from 'components/EnigmaSettings';
 
 let serverAddress = 'localhost';
 let serverPort = '3000';
@@ -25,6 +26,7 @@ class TuringTalk extends Component {
     this.handleMessage = this.handleMessage.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
     this.translateMessage = this.translateMessage.bind(this);
+    this.updateSettings = this.updateSettings.bind(this);
   }
 
   handleMessage(message) {
@@ -43,6 +45,18 @@ class TuringTalk extends Component {
     return translateInput(message, this.state.enigmaSettings);
   }
 
+  updateSettings(settings) {
+    this.setState({
+      enigmaSettings:{
+        leftRotor: settings.leftRotor     || this.state.enigmaSettings.leftRotor,
+        leftShift: settings.leftShift     || this.state.enigmaSettings.leftShift,
+        middleRotor: settings.middleRotor || this.state.enigmaSettings.middleRotor,
+        middleShift: settings.middleShift || this.state.enigmaSettings.middleShift,
+        rightRotor: settings.rightRotor   || this.state.enigmaSettings.rightRotor,
+        rightShift: settings.rightShift   || this.state.enigmaSettings.rightShift
+    }});
+  }
+
   componentDidMount() {
     socket.on('init', (data) => {
       console.log(data);
@@ -58,6 +72,8 @@ class TuringTalk extends Component {
           messages={ this.state.messages }
           sendmethod={ this.sendMessage }
         />
+        <EnigmaSettings updateSettings={this.updateSettings} 
+          {...this.state.enigmaSettings}/>
       </div>
     );
   }
