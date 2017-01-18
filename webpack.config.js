@@ -16,7 +16,7 @@ let config = {
     publicPath: PUBLIC_DIR
   },
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json', '.scss', '.css'],
+    extensions: ['', '.js', '.jsx', '.json'],
     root: [
       path.resolve(__dirname, './src/client/')
     ],
@@ -32,8 +32,10 @@ let config = {
         loaders: ['babel-loader']
       },
       {
-        test: /\.(scss|css)$/,
-        loader: extractCSS.extract(['css', 'sass'])
+        test: /\.s?css$/,
+        // loader: extractCSS.extract(['css', 'sass'])
+        loader: extractCSS.extract('style-loader', 
+          'css-loader?modules&importLoaders=1&localIdentName=[name]__[hash:base64:5]!sass-loader')
       }
     ]
   },
