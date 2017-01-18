@@ -33,7 +33,6 @@ let config = {
       },
       {
         test: /\.s?css$/,
-        // loader: extractCSS.extract(['css', 'sass'])
         loader: extractCSS.extract('style-loader', 
           'css-loader?modules&importLoaders=1&localIdentName=[name]__[hash:base64:5]!sass-loader')
       }

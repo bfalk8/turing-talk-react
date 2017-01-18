@@ -39,13 +39,25 @@ rotorStep[8] = 'M';
 
 const reflector  = "YRUHQSLDPXNGOKMIEBFZCWVJAT yruhqsldpxngokmiebfzcwvjat"; // M3 B
 
-function checkSettings(settings) {
-  return true;
+function verifiedSettings(settings) {
+  return {
+    leftRotor: settings.leftRotor <= 8 && settings.leftRotor > 0 ? 
+      settings.leftRotor : 1,
+    leftShift: Math.abs(settings.leftShift) % alphabet.length,
+    middleRotor: settings.middleRotor <= 8 && settings.middleRotor > 0 ? 
+      settings.middleRotor : 1,
+    middleShift: Math.abs(settings.middleShift) % alphabet.length,
+    rightRotor: settings.rightRotor <= 8 && settings.rightRotor > 0 ? 
+      settings.rightRotor : 1,
+    rightShift: Math.abs(settings.rightShift) % alphabet.length,
+  };
 }
 
 function shiftRotor(rotor, ammount) {
-  let caught = rotors[rotor].substr(0, ammount).includes(rotorStep[rotor]);
-  return [ caught, rotors[rotor].slice(ammount) + rotors[rotor].substr(0, ammount) ];
+  let correctShift = ammount % alphabet.length;
+  let caught = rotors[rotor].substr(0, correctShift).includes(rotorStep[rotor]);
+  return [ caught, 
+    rotors[rotor].slice(correctShift) + rotors[rotor].substr(0, correctShift) ];
 }
 
 function invertRotor(rotor) {
@@ -63,10 +75,19 @@ function mapThroughWheel(rotor, letter) {
 }
 
 function translateInput(message, settings) {
-  if(!checkSettings(settings)) return message;
-  let setRotors = [settings.rightRotor, settings.middleRotor, settings.leftRotor];
-  let positions = [ settings.rightShift, settings.middleShift, settings.leftShift ];
-  console.log(positions);
+  let goodSettings = verifiedSettings(settings);
+  let setRotors = [
+    goodSettings.rightRotor, 
+    goodSettings.middleRotor, 
+    goodSettings.leftRotor
+  ];
+
+  let positions = [ 
+    goodSettings.rightShift, 
+    goodSettings.middleShift, 
+    goodSettings.leftShift 
+  ];
+
   let decodedMessage = message.split('').reduce(
     (accum, curr) => {
       if(alphabet.indexOf(curr) < 0) {

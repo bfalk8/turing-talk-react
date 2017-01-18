@@ -34,6 +34,21 @@ class EnigmaSettings extends Component {
           value={this.props.rightRotor}>
           {options.map((x) => (<option value={x+1}>{x+1}</option>))}
         </select>
+
+        <p>Left Shift</p>
+        <input type="text" name='leftShift' value={this.props.leftShift} 
+          onChange={this.handleUpdate}
+        />
+
+        <p>Middle Shift</p>
+        <input type="text" name='middleShift' value={this.props.middleShift} 
+          onChange={this.handleUpdate}
+        />
+
+        <p>Right Shift</p>
+        <input type="text" name='rightShift' value={this.props.rightShift} 
+          onChange={this.handleUpdate}
+        />
       </div>
     );
   }
