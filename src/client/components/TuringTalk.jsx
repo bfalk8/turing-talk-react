@@ -6,7 +6,8 @@ import EnigmaSettings from 'components/EnigmaSettings';
 
 let serverAddress = 'localhost';
 let serverPort = '3000';
-let socket = io(`${serverAddress}:${serverPort}`);
+// let socket = io(`${serverAddress}:${serverPort}`);
+let socket = io();
 let defaultSettings = {
   leftRotor: 1,
   leftShift: 0,
@@ -58,6 +59,7 @@ class TuringTalk extends Component {
   }
 
   componentDidMount() {
+    socket.connect();
     socket.on('init', (data) => {
       console.log(data);
     });

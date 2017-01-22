@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import styles from './Message.css';
+import style from './Message.css';
 
 class Message extends Component {
   render() {
     return (
-      <div className={styles.root}>
-        <p>Encoded Message: {this.props.encodedMessage}</p>
-        <p>Decoded Message: {this.props.decodedMessage}</p>
+      <div className={style.root}>
+        <p className={style.message}>Encoded Message: {this.props.encodedMessage}</p>
+        <p className={style.message}>Decoded Message: {this.props.decodedMessage}</p>
       </div>
     );
   }

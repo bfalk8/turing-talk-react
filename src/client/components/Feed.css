@@ -1,0 +1,6 @@
+.root {
+  composes: grid from 'siimple/src/_grid.scss';
+  /* width: 90%; */
+  height: 400px;
+  overflow-y: auto;
+}

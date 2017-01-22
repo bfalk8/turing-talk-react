@@ -13,6 +13,7 @@
  *                       in alphabetic order from A->Z
  * }
  */
+
 const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz";
 let rotors = {};
 rotors[1] = "EKMFLGDQVZNTOWYHXUSPAIBRCJ ekmflgdqvzntowyhxuspaibrcj"; // Rotor I
@@ -33,9 +34,6 @@ rotorStep[5] = 'Z';
 rotorStep[6] = 'Z';
 rotorStep[7] = 'Z';
 rotorStep[8] = 'M';
-// rotorStep[6] = 'ZM';
-// rotorStep[7] = 'ZM';
-// rotorStep[8] = 'ZM';
 
 const reflector  = "YRUHQSLDPXNGOKMIEBFZCWVJAT yruhqsldpxngokmiebfzcwvjat"; // M3 B
 
