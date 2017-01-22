@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node app.js",
-    "prestart": "webpack -d --progress --colors",
     "build": "webpack --config ./webpack.prod.config.js --progress --colors",
-    "dev": "webpack --progress --colors --watch && node app.js",
+    "dev": "webpack -d --progress --colors && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "heroku-postbuild": "webpack --config ./webpack.prod.config.js --progress --colors"
   },
@@ -33,26 +32,26 @@
   },
   "homepage": "https://github.com/bfalk8/turing-talk-react#readme",
   "devDependencies": {
+    "webpack-dev-server": "^1.16.2"
+  },
+  "dependencies": {
     "babel-core": "^6.21.0",
     "babel-loader": "^6.2.10",
     "babel-preset-es2015": "^6.18.0",
     "babel-preset-react": "^6.16.0",
     "css-loader": "^0.26.1",
+    "express": "^4.14.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
     "node-sass": "^4.3.0",
-    "sass-loader": "^4.1.1",
-    "style-loader": "^0.13.1",
-    "webpack": "^1.14.0",
-    "webpack-dev-server": "^1.16.2"
-  },
-  "dependencies": {
-    "express": "^4.14.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-toolbox": "^1.3.4",
+    "sass-loader": "^4.1.1",
     "siimple": "^1.3.7",
+    "style-loader": "^0.13.1",
     "socket.io": "^1.7.2",
-    "socket.io-client": "^1.7.2"
+    "socket.io-client": "^1.7.2",
+    "webpack": "^1.14.0"
   }
 }
