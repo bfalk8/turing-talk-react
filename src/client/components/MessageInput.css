@@ -3,7 +3,7 @@
 }
 
 .text {
-  composes: pure-u-3-4 from 'purecss/build/grids.css';
+  composes: pure-u-1 from 'purecss/build/grids.css';
 }
 
 .button {
