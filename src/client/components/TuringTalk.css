@@ -40,3 +40,7 @@
 @media screen and (min-width: 64em) {
   .chatDesc {display: block;}
 }
+
+.pagewrap {
+  height: 100vh;
+}

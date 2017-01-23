@@ -46,7 +46,8 @@ var menuStyles = {
     fill: '#373a47'
   },
   bmItemList: {
-    padding: '0.8em'
+    padding: '0.8em',
+    height: 'auto'
   },
   bmOverlay: {
     background: 'rgba(0, 0, 0, 0.3)'
@@ -111,7 +112,7 @@ class TuringTalk extends Component {
             {...this.state.enigmaSettings}
           />
         </Menu.scaleRotate>
-        <div id="pageWrap">
+        <div id="pageWrap" className={style.pagewrap}>
           <h1> Turing Talk! </h1>
           <div className={style.row}>
             <div className={style.chatDesc}>
