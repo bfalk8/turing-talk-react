@@ -72,11 +72,13 @@ class TuringTalk extends Component {
       <div>
         <h1> Turing Talk! </h1>
         <div className={style.row}>
+          <div className={style.chatBlank} />
           <Chat
             className={style.chat}
             messages={ this.state.messages }
             sendmethod={ this.sendMessage }
           />
+          <div className={style.chatBlank} />
           <EnigmaSettings 
             className={style.settings}
             updateSettings={this.updateSettings} 
