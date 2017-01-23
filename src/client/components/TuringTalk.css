@@ -28,6 +28,10 @@
   text-align: right;
 }
 
+.chatDesc {
+  composes: pure-u-md-1-4 from 'purecss/build/grids-responsive.css';
+}
+
 .chatBlank {
   composes: pure-u-md-1-8 from 'purecss/build/grids-responsive.css';
 }

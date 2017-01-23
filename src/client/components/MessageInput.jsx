@@ -33,7 +33,7 @@ class MessageInput extends Component {
           onKeyDown={this.handleKeyPress}
           ref={(input) => {this.textInput = input}}
         />
-        <input className={style.button} type="button" name="submit_btn" value="Send" 
+        <input className={style.button} type="button" name="submit_btn" value="Broadcast" 
           onClick={this.handleClick} />
       </div>
     );

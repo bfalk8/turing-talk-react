@@ -2,16 +2,26 @@
 
 // @import 'style.scss';
 
-// $bgColor: #f5f5f5;
-$bgColor: #BAC1B8;
+$bgColor: #f5f5f5;
+// $bgColor: #BAC1B8;
 $font: Helvetica;
+$monoFont: "Lucida Console", Monaco, monospace;
 $font-color: #474448;
 
 body {
     background: $bgColor;
+    font-family: $monoFont;
 }
 
 p {
-  font-family: $font;
+  font-family: $monoFont;
   color: $font-color;
+}
+
+h1 {
+  font-family: $monoFont;;
+}
+
+h2 {
+  font-family: $monoFont;
 }

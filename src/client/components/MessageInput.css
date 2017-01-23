@@ -1,14 +1,11 @@
 .row {
-  /* composes: pure-g from 'purecss/build/grids.css'; */
   width: 100%;
 }
 
 .text {
-  /* composes: pure-u-3-4 from 'purecss/build/grids-units.css'; */
   width: 80%;
 }
 
 .button {
-  /* composes: pure-u-1-4 from 'purecss/build/grids-units.css'; */
   width: 19%;
 }
