@@ -18,7 +18,7 @@ class EnigmaSettings extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <h2>Enigma Settings</h2>
+        <h2 className={style.title}>Enigma Settings</h2>
         <div className={style.row}>
           <div className={style.col}>
             <p>Left Rotor</p>
