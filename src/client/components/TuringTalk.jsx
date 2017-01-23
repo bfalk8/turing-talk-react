@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import io from 'socket.io-client';
 import { translateInput } from 'enigma';
+import style from './TuringTalk.css';
 import Chat from 'components/Chat';
 import EnigmaSettings from 'components/EnigmaSettings';
 
@@ -33,7 +34,7 @@ class TuringTalk extends Component {
   handleMessage(message) {
     this.setState({
       messages: this.state.messages.concat(
-        {encoded: message, decoded: this.translateMessage(message)})
+        {encoded: message, decoded: this.translateMessage(message), timestamp: new Date().toString()})
     });
   }
 
@@ -70,12 +71,17 @@ class TuringTalk extends Component {
     return (
       <div>
         <h1> Turing Talk! </h1>
-        <Chat
-          messages={ this.state.messages }
-          sendmethod={ this.sendMessage }
-        />
-        <EnigmaSettings updateSettings={this.updateSettings} 
-          {...this.state.enigmaSettings}/>
+        <div className={style.row}>
+          <Chat
+            className={style.chat}
+            messages={ this.state.messages }
+            sendmethod={ this.sendMessage }
+          />
+          <EnigmaSettings 
+            className={style.settings}
+            updateSettings={this.updateSettings} 
+            {...this.state.enigmaSettings}/>
+        </div>
       </div>
     );
   }

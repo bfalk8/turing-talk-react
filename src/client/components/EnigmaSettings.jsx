@@ -16,7 +16,7 @@ class EnigmaSettings extends Component {
 
   render() {
     return (
-      <div>
+      <div className={this.props.className}>
         <p>Left Rotor</p>
         <select name='leftRotor' onChange={this.handleUpdate} 
           value={this.props.leftRotor}>

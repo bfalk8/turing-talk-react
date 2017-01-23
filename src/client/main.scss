@@ -1,12 +1,17 @@
 // Create global styles here
 
-@import '~siimple/src/_colors.scss';
-@import '~siimple/src/_base.scss';
-@import '~siimple/src/_typography.scss';
-
 // @import 'style.scss';
 
 // $bgColor: #f5f5f5;
-// body {
-//     background: $bgColor;
-// }
+$bgColor: #BAC1B8;
+$font: Helvetica;
+$font-color: #474448;
+
+body {
+    background: $bgColor;
+}
+
+p {
+  font-family: $font;
+  color: $font-color;
+}

@@ -10,7 +10,9 @@ class Feed extends Component {
         {this.props.messages.map((message) => 
           <Message 
             encodedMessage={message.encoded} 
-            decodedMessage={message.decoded} /> 
+            decodedMessage={message.decoded}
+            timestamp={message.timestamp}
+          /> 
         )}
       </div>
     );

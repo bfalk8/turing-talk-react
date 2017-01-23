@@ -5,8 +5,13 @@ class Message extends Component {
   render() {
     return (
       <div className={style.root}>
-        <p className={style.message}>Encoded Message: {this.props.encodedMessage}</p>
-        <p className={style.message}>Decoded Message: {this.props.decodedMessage}</p>
+        <div className={style.messageEncoded}>
+          <p className={style.message}>{this.props.encodedMessage}</p>
+          <p className={style.timestamp}>{this.props.timestamp}</p>
+        </div>
+        <div className={style.messageDecoded}>
+          <p className={style.message}>{this.props.decodedMessage}</p>
+        </div>
       </div>
     );
   }
