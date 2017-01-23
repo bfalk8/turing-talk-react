@@ -4,6 +4,7 @@ import { translateInput } from 'enigma';
 import style from './TuringTalk.css';
 import Chat from 'components/Chat';
 import EnigmaSettings from 'components/EnigmaSettings';
+import Menu from 'react-burger-menu';
 
 let serverAddress = 'localhost';
 let serverPort = '3000';
@@ -16,6 +17,40 @@ let defaultSettings = {
   middleShift: 0,
   rightRotor: 3,
   rightShift: 0
+};
+
+var menuStyles = {
+  bmBurgerButton: {
+    position: 'fixed',
+    width: '36px',
+    height: '30px',
+    right: '25px',
+    top: '25px'
+  },
+  bmBurgerBars: {
+    background: '#373a47'
+  },
+  bmCrossButton: {
+    height: '30px',
+    width: '30px'
+  },
+  bmCross: {
+    background: '#373a47'
+  },
+  bmMenu: {
+    background: '#f5f5f5',
+    padding: '2.5em 1.5em 0',
+    fontSize: '1.15em'
+  },
+  bmMorphShape: {
+    fill: '#373a47'
+  },
+  bmItemList: {
+    padding: '0.8em'
+  },
+  bmOverlay: {
+    background: 'rgba(0, 0, 0, 0.3)'
+  }
 };
 
 class TuringTalk extends Component {
@@ -70,20 +105,24 @@ class TuringTalk extends Component {
   render() {
     return (
       <div>
-        <h1> Turing Talk! </h1>
-        <div className={style.row}>
-          <div className={style.chatDesc}>
-            <p>Encrypted messages over the wire like it's the 1940's...</p>
-          </div>
-          <Chat
-            className={style.chat}
-            messages={ this.state.messages }
-            sendmethod={ this.sendMessage }
-          />
+        <Menu.scaleRotate right styles={menuStyles} pageWrapId={"pageWrap"} outerContainerId={"app"}>
           <EnigmaSettings 
-            className={style.settings}
             updateSettings={this.updateSettings} 
-            {...this.state.enigmaSettings}/>
+            {...this.state.enigmaSettings}
+          />
+        </Menu.scaleRotate>
+        <div id="pageWrap">
+          <h1> Turing Talk! </h1>
+          <div className={style.row}>
+            <div className={style.chatDesc}>
+              <p>Encrypted messages over the wire like it's the 1940's...</p>
+            </div>
+            <Chat
+              className={style.chat}
+              messages={ this.state.messages }
+              sendmethod={ this.sendMessage }
+            />
+          </div>
         </div>
       </div>
     );
