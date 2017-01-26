@@ -6,17 +6,16 @@ import Chat from 'components/Chat';
 import EnigmaSettings from 'components/EnigmaSettings';
 import Menu from 'react-burger-menu';
 
-let serverAddress = 'localhost';
-let serverPort = '3000';
-// let socket = io(`${serverAddress}:${serverPort}`);
 let socket = io();
+
 let defaultSettings = {
   leftRotor: 1,
   leftShift: 0,
   middleRotor: 2,
   middleShift: 0,
   rightRotor: 3,
-  rightShift: 0
+  rightShift: 0,
+  plugboard: []
 };
 
 var menuStyles = {
@@ -70,7 +69,8 @@ class TuringTalk extends Component {
   handleMessage(message) {
     this.setState({
       messages: this.state.messages.concat(
-        {encoded: message, decoded: this.translateMessage(message), timestamp: new Date().toString()})
+        {encoded: message, decoded: this.translateMessage(message), 
+          timestamp: new Date().toString()})
     });
   }
 
@@ -91,7 +91,8 @@ class TuringTalk extends Component {
         middleRotor: settings.middleRotor || this.state.enigmaSettings.middleRotor,
         middleShift: settings.middleShift || this.state.enigmaSettings.middleShift,
         rightRotor: settings.rightRotor   || this.state.enigmaSettings.rightRotor,
-        rightShift: settings.rightShift   || this.state.enigmaSettings.rightShift
+        rightShift: settings.rightShift   || this.state.enigmaSettings.rightShift,
+        plugboard: settings.plugboard     || this.state.enigmaSettings.plugboard
     }});
   }
 

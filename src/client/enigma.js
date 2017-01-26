@@ -9,8 +9,7 @@
  *  middleShift: int, // (range 0-25)
  *  rightRotor: int,  // (range 1-8)
  *  rightShift: int,  // (range 0-25)
- *  plugboard: [char] // list of chars in order of mappings from letter to letter placed
- *                       in alphabetic order from A->Z
+ *  plugboard: [[char,char],...] // list of chars in order of mappings from letter to letter
  * }
  */
 
@@ -38,6 +37,20 @@ rotorStep[8] = 'M';
 const reflector  = "YRUHQSLDPXNGOKMIEBFZCWVJAT yruhqsldpxngokmiebfzcwvjat"; // M3 B
 
 function verifiedSettings(settings) {
+  let plugboard = {};
+
+  if(settings.plugboard) {
+    let upperAlphabet = alphabet.split(' ')[0];
+    settings.plugboard.forEach((elem) => {
+      if(upperAlphabet.includes(elem[0]) && upperAlphabet.includes(elem[1])) {
+        plugboard[elem[0]] = elem[1];
+        plugboard[elem[1]] = elem[0];
+        plugboard[elem[0].toLowerCase()] = elem[1].toLowerCase();
+        plugboard[elem[1].toLowerCase()] = elem[0].toLowerCase();
+      }
+    })
+  }
+
   return {
     leftRotor: settings.leftRotor <= 8 && settings.leftRotor > 0 ? 
       settings.leftRotor : 1,
@@ -48,6 +61,7 @@ function verifiedSettings(settings) {
     rightRotor: settings.rightRotor <= 8 && settings.rightRotor > 0 ? 
       settings.rightRotor : 1,
     rightShift: Math.abs(settings.rightShift) % alphabet.length,
+    plugboard: plugboard
   };
 }
 
@@ -72,6 +86,13 @@ function mapThroughWheel(rotor, letter) {
   return alphabet[rotor.indexOf(letter)];
 }
 
+function mapThroughPlugboard(plugConfig, letter) {
+  if(letter in plugConfig) {
+    return plugConfig[letter];
+  }
+  return letter;
+}
+
 function translateInput(message, settings) {
   let goodSettings = verifiedSettings(settings);
   let setRotors = [
@@ -86,6 +107,8 @@ function translateInput(message, settings) {
     goodSettings.leftShift 
   ];
 
+  let plugboard = goodSettings.plugboard;
+
   let decodedMessage = message.split('').reduce(
     (accum, curr) => {
       if(alphabet.indexOf(curr) < 0) {
@@ -93,7 +116,7 @@ function translateInput(message, settings) {
       }
       positions[0]++;
       let caught = false;
-      let travelingChar = curr;
+      let travelingChar = mapThroughPlugboard(plugboard, curr);
 
       setRotors.forEach((elem, i) => {
         positions[i] = caught ? positions[i] + 1 : positions[i];
@@ -108,6 +131,8 @@ function translateInput(message, settings) {
         let [_, shiftedRotor] = shiftRotor(elem, positions[positions.length - 1 - i]);
         travelingChar = mapThroughWheel(invertRotor(shiftedRotor), travelingChar);
       });
+
+      travelingChar = mapThroughPlugboard(plugboard, travelingChar);
 
       return accum.concat(travelingChar);
     },

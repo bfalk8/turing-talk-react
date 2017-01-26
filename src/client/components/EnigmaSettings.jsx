@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import style from './EnigmaSettings.css';
 
-let rotorOptions = [...Array(8).keys()];
-let shiftOptions = [...Array(26).keys()];
+const rotorOptions = [...Array(8).keys()];
+const shiftOptions = [...Array(26).keys()];
+const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
+const stdPlug = ['A','A'];
 
 class EnigmaSettings extends Component {
   constructor(props) {
     super(props);
     this.handleUpdate = this.handleUpdate.bind(this);
+    this.handlePlugUpdate = this.handlePlugUpdate.bind(this);
+    this.addPlug = this.addPlug.bind(this);
   }
 
   handleUpdate(e) {
@@ -16,7 +20,44 @@ class EnigmaSettings extends Component {
     this.props.updateSettings(updatedSettings);
   }
 
+  handlePlugUpdate(e) {
+    let plugIndex = parseInt(e.target.name.split(' ')[1]);
+    let firstEntry = e.target.name.split(' ')[0].endsWith('A');
+    let arr = this.props.plugboard.slice(0);
+    arr[plugIndex][firstEntry ? 0 : 1] = e.target.value;
+    let updatedSettings = {plugboard: arr};
+    this.props.updateSettings(updatedSettings);
+  }
+
+  addPlug() {
+    let updatedSettings = {plugboard: this.props.plugboard.concat([stdPlug.slice(0)])};
+    console.log(stdPlug);
+    this.props.updateSettings(updatedSettings);
+  }
+
   render() {
+    let plugs = [];
+    this.props.plugboard.forEach((elem, index) => {
+      plugs.push(
+        <div className={style.row}>
+          <div className={style.col}>
+            <select name={`plugA ${index}`} onChange={this.handlePlugUpdate} 
+              value={elem[0]}>
+              {alphabet.map((x) => (<option value={x}>{x}</option>))}
+            </select>
+          </div>
+          <div className={style.col}>
+            { '<--->' }
+          </div>
+          <div className={style.col}>
+            <select name={`plugB ${index}`} onChange={this.handlePlugUpdate} 
+              value={elem[1]}>
+              {alphabet.map((x) => (<option value={x}>{x}</option>))}
+            </select>
+          </div>
+        </div>
+      );});
+
     return (
       <div className={this.props.className}>
         <h2 className={style.title}>Enigma Settings</h2>
@@ -71,6 +112,13 @@ class EnigmaSettings extends Component {
             </select>
           </div>
         </div>
+
+        {plugs}
+
+        <div className={style.row}>
+          <button className={style.addBtn} onClick={this.addPlug}>+ Add Plug +</button>
+        </div>
+
       </div>
     );
   }
