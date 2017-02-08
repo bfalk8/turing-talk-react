@@ -28,11 +28,14 @@ class MessageInput extends Component {
 
   render() {
     return (
-      <div className={style.row}>
-        <input className={style.text} type="text" placeholder={this.state.messageText} 
+      <div className={style.flexRow}>
+        <input className={style.flexInput} type="text" placeholder={this.state.messageText} 
           onKeyDown={this.handleKeyPress}
           ref={(input) => {this.textInput = input}}
         />
+        <button className={style.flexBtn} onClick={this.handleClick}>
+          Broadcast!
+        </button>
       </div>
     );
   }

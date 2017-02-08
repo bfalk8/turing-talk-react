@@ -10,3 +10,16 @@
   composes: pure-u-1-8 from 'purecss/build/grids.css';
   composes: pure-button from 'purecss/build/buttons.css';
 }
+
+.flexRow {
+    display: flex;
+}
+
+.flexInput {
+    flex: 1;
+}
+
+.flexBtn {
+  composes: pure-button from 'purecss/build/buttons.css';
+  cursor: pointer;
+}
